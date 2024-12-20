@@ -17,6 +17,8 @@ export default {
         "main-color": "#005A71",
         "secondary-color": "#EEFAF6",
         "ternary-color": "#00728D",
+        "ternary-light-color": "#90CBD6",
+        "ternary-extra-light-color": "#0084A4CC",
         dark: "#004656",
         light: "#0099BDAB",
       },
@@ -24,3 +26,4 @@ export default {
   },
   plugins: [require("tailwindcss-textshadow")],
 };
+

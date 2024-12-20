@@ -1,20 +1,19 @@
 import Header from "../../Components/landing/Header";
 import Footer from "../../Components/landing/Footer";
-import Search from "../../Components/landing/SearchSection";
-import TeacherQualification from "../../Components/landing/TeacherQualification";
-import FAQSection from "../../Components/landing/Faq";
-import FeaturesSection from "../../Components/landing/Features";
-import HowItWorksSection from "../../Components/landing/HowItWorks";
+import { Route, Routes } from "react-router-dom";
+import LandingPageMainBody from "../../Components/landing/LandingPageMainBody";
+import LandingPageSearchPage from "../../Components/landing/LandingPageSearchPage";
+import LandidngPageSubjectsPage from "../../Components/landing/LandidngPageSubjectsPage";
 
 const LandingPage = () => {
   return (
     <div>
       <Header />
-      <Search />
-      <FeaturesSection />
-      <HowItWorksSection />
-      <TeacherQualification />
-      <FAQSection />
+      <Routes>
+        <Route path="/" element={<LandingPageMainBody />} />
+        <Route path="/search" element={<LandingPageSearchPage />} />
+        <Route path="/levels" element={<LandidngPageSubjectsPage />} />
+      </Routes>
       <Footer />
     </div>
   );

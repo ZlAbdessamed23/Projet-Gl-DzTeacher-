@@ -1,81 +1,139 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../../assets/logo.png";
+import { Link } from "react-router-dom";
+import { Primary, CEM, Lycee, College } from "../../Types/constants";
 
 const Header: React.FC = () => {
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
+
+  const toggleMenu = (menu: string) => {
+    setActiveMenu((prev) => (prev === menu ? null : menu));
+  };
+
+  const dropdownAnimation = "transition-all duration-300 transform scale-95";
+
   return (
     <header className="bg-main-color font-poppins relative z-30 text-white p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex">
-          <img src={logo} alt="Logo" className="h-8 w-8" />{" "}
-          {/* Adjust height and width as needed */}{" "}
-          <div className="text-xl text-[#77E0DF]">Dz Teacher</div>
+          <img src={logo} alt="Logo" className="h-8 w-8" />
+          <div className="text-xl text-[#77E0DF] ml-2">Dz Teacher</div>
         </div>
         {/* Navigation Buttons with Dropdown Menus */}
         <nav>
           <ul className="flex space-x-16 text-xl text-nowrap">
-            <li className="relative group">
-              <button className="flex items-center hover:text-gray-300">
+            {/* Primary */}
+            <li className="relative">
+              <button
+                onClick={() => toggleMenu("primary")}
+                className="flex items-center hover:text-gray-300"
+              >
                 Primaire{" "}
                 <span className="ml-2 text-2xl font-mono transform rotate-90">
                   &gt;
                 </span>
               </button>
-              <ul className="absolute left-0 mt-2 hidden group-hover:block text-main-color shadow-md">
-                <li className="p-2 hover:bg-gray-200 bg-secondary-color font-light">
-                  <a href="#primaire-1">Primaire 1</a>
-                </li>
-                <li className="p-2 hover:bg-gray-200 bg-secondary-color font-light">
-                  <a href="#primaire-2">Primaire 2</a>
-                </li>
-                <li className="p-2 hover:bg-gray-200 bg-secondary-color font-light">
-                  <a href="#primaire-1">Primaire 3</a>
-                </li>
-                <li className="p-2 hover:bg-gray-200 bg-secondary-color font-light">
-                  <a href="#primaire-2">Primaire 4</a>
-                </li>
-                <li className="p-2 hover:bg-gray-200 bg-secondary-color font-light">
-                  <a href="#primaire-2">Primaire 5</a>
-                </li>
-              </ul>
+              {activeMenu === "primary" && (
+                <ul
+                  className={`absolute left-0 mt-2 bg-secondary-color text-main-color shadow-md rounded-md ${dropdownAnimation}`}
+                >
+                  {Object.values(Primary).map((level, index) => (
+                    <li
+                      key={index}
+                      className="p-2 hover:bg-gray-200 font-light"
+                    >
+                      <a href={`#primaire-${index + 1}`}>{level}</a>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
-            <li className="relative group">
-              <button className="flex items-center hover:text-gray-300">
-                Collège
+            {/* CEM */}
+            <li className="relative">
+              <button
+                onClick={() => toggleMenu("cem")}
+                className="flex items-center hover:text-gray-300"
+              >
+                Collège{" "}
                 <span className="ml-2 text-2xl font-mono transform rotate-90">
                   &gt;
                 </span>
               </button>
-              <ul className="absolute left-0 mt-2 hidden group-hover:block text-main-color shadow-md">
-                <li className="p-2 hover:bg-gray-200 bg-secondary-color font-light">
-                  <a href="#college-1">Collège 1</a>
-                </li>
-                <li className="p-2 hover:bg-gray-200 bg-secondary-color font-light">
-                  <a href="#college-2">Collège 2</a>
-                </li>
-              </ul>
+              {activeMenu === "cem" && (
+                <ul
+                  className={`absolute left-0 mt-2 bg-secondary-color text-main-color shadow-md rounded-md ${dropdownAnimation}`}
+                >
+                  {Object.values(CEM).map((level, index) => (
+                    <li
+                      key={index}
+                      className="p-2 hover:bg-gray-200 font-light"
+                    >
+                      <a href={`#college-${index + 1}`}>{level}</a>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
-            <li className="relative group">
-              <button className="flex items-center hover:text-gray-300">
+            {/* Lycee */}
+            <li className="relative">
+              <button
+                onClick={() => toggleMenu("lycee")}
+                className="flex items-center hover:text-gray-300"
+              >
                 Lycée{" "}
                 <span className="ml-2 text-2xl font-mono transform rotate-90">
                   &gt;
                 </span>
               </button>
-              <ul className="absolute left-0 mt-2 hidden group-hover:block text-main-color shadow-md">
-                <li className="p-2 hover:bg-gray-200 bg-secondary-color font-light">
-                  <a href="#lycee-1">Lycée 1</a>
-                </li>
-                <li className="p-2 hover:bg-gray-200 bg-secondary-color font-light">
-                  <a href="#lycee-2">Lycée 2</a>
-                </li>
-              </ul>
+              {activeMenu === "lycee" && (
+                <ul
+                  className={`absolute left-0 mt-2 bg-secondary-color text-main-color shadow-md rounded-md ${dropdownAnimation}`}
+                >
+                  {Object.values(Lycee).map((level, index) => (
+                    <li
+                      key={index}
+                      className="p-2 hover:bg-gray-200 font-light"
+                    >
+                      <a href={`#lycee-${index + 1}`}>{level}</a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+            {/* College */}
+            <li className="relative">
+              <button
+                onClick={() => toggleMenu("college")}
+                className="flex items-center hover:text-gray-300"
+              >
+                Université{" "}
+                <span className="ml-2 text-2xl font-mono transform rotate-90">
+                  &gt;
+                </span>
+              </button>
+              {activeMenu === "college" && (
+                <ul
+                  className={`absolute left-0 mt-2 bg-secondary-color text-main-color shadow-md rounded-md ${dropdownAnimation}`}
+                >
+                  {Object.values(College).map((level, index) => (
+                    <li
+                      key={index}
+                      className="p-2 hover:bg-gray-200 font-light"
+                    >
+                      <a href={`#college-${index + 1}`}>{level}</a>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
           </ul>
         </nav>
         {/* Login Button */}
         <div>
           <button className="bg-light text-white text-xl mr-4 ml-52 px-8 py-1 rounded-xl hover:bg-gray-200 hover:text-light">
-            Login
+            <Link to={"/auth/signin"} className="w-full h-full">
+              Login
+            </Link>
           </button>
         </div>
       </div>
