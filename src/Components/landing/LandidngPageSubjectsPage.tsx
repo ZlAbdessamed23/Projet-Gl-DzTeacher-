@@ -4,6 +4,6 @@ const LandidngPageSubjectsPage = () => {
       {/* here we do fetch and get the subjects infos */}
     </div>
   )
-}
+};
 
 export default LandidngPageSubjectsPage

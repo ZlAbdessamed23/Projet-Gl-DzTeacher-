@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 body {
-    @apply bg-secondary-color !important
+    @apply bg-secondary-color w-screen overflow-x-hidden !important
 }

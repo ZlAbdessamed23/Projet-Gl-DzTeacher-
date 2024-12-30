@@ -1,3 +1,8 @@
+export enum UserType {
+    student = "etudiant",
+    teacher = "enseignant"
+};
+
 export enum Level {
     primary = "primaire",
     cem = "CEM",
@@ -41,5 +46,11 @@ export enum SubjectNames {
     francais  = "français",
     english  = "anglais",
     science  = "sciences",
+};
+
+export enum PaymentStatus {
+    notPayed  = "NonPayé",
+    Payed  = "Payé",
+    pending  = "EnAttente",
 };
 

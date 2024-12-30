@@ -1,4 +1,3 @@
-import React from 'react'
 import AuthPagesWrapper from '../../Components/auth/AuthPagesWrapper'
 import SignupForm from '../../Components/auth/SignupForm'
 

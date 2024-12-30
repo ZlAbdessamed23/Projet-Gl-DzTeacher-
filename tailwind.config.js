@@ -19,6 +19,8 @@ export default {
         "ternary-color": "#00728D",
         "ternary-light-color": "#90CBD6",
         "ternary-extra-light-color": "#0084A4CC",
+        "ternary-semi-dark-color" : "#015A71",
+        "ternary-dark-color": "#002027",
         dark: "#004656",
         light: "#0099BDAB",
       },

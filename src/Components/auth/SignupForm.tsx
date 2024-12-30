@@ -2,6 +2,8 @@ import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { FaUser, FaEnvelope, FaLock } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { RegisterUser } from '../../Types/types';
+import { UserType } from '../../Types/constants';
 
 const SignupForm = () => {
     const {
@@ -51,7 +53,7 @@ const SignupForm = () => {
                         </div>
                         {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
                     </div>
-                    <div className="mb-2">
+                    <div className="mb-4">
                         <div className="flex items-center bg-gray-100 w-80 p-2 rounded-md">
                             <FaLock className="text-gray-500 mr-2" />
                             <input
@@ -69,9 +71,28 @@ const SignupForm = () => {
                         </div>
                         {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
                     </div>
-                    <div className='flex gap-2 mb-6'>
-                        <span className='text-gray-400'>Vous avez déja un compte?</span>
-                        <span><Link to={"/auth/signin"} className='text-ternary-extra-light-color text-md'> Connectez-vous</Link></span>
+                    <div className="mb-4">
+                        <div className="bg-gray-100 w-80 p-2 rounded-md">
+                            <select
+                                {...register('type', { required: 'Le type d\'utilisateur est requis.' })}
+                                className="w-full bg-transparent outline-none text-gray-700"
+                            >
+                                <option value="" disabled selected>
+                                    Sélectionnez le type d'utilisateur
+                                </option>
+                                <option value={UserType.student}>Étudiant</option>
+                                <option value={UserType.teacher}>Enseignant</option>
+                            </select>
+                        </div>
+                        {errors.type && <p className="text-red-500 text-sm mt-1">{errors.type.message}</p>}
+                    </div>
+                    <div className="flex gap-2 mb-6">
+                        <span className="text-gray-400">Vous avez déjà un compte?</span>
+                        <span>
+                            <Link to="/auth/signin" className="text-ternary-extra-light-color text-md">
+                                Connectez-vous
+                            </Link>
+                        </span>
                     </div>
                     <button
                         type="submit"
