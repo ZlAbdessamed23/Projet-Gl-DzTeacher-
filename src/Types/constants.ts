@@ -49,8 +49,13 @@ export enum SubjectNames {
 };
 
 export enum PaymentStatus {
-    notPayed  = "NonPayé",
+    notPayed  = "nonPayé",
     Payed  = "Payé",
-    pending  = "EnAttente",
+    pending  = "enAttente",
+};
+
+export enum CourseType {
+    local = "présentiel",
+    online = "enLigne",
 };
 

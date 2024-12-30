@@ -73,7 +73,7 @@ const Dropdown = ({ title, options, selected, setSelected }: {
 
     return (
         <div
-            className={`relative bg-[#90CBD633] border border-ternary-color rounded-md px-4 py-2 w-64 cursor-pointer`}
+            className={`relative bg-[#90CBD633] border border-ternary-color rounded-md px-4 py-2 w-72 cursor-pointer`}
             onClick={() => setIsOpen(!isOpen)}
         >
             <div className="flex justify-between items-center">
@@ -125,7 +125,7 @@ const StudentPayments = () => {
             title="Suivi des Paiements"
         >
             <div className='w-11/12 mx-auto flex items-center'>
-                <div className="w-1/2 flex flex-col items-center gap-4">
+                <div className="w-1/2 flex flex-col items-start gap-4">
                     <Dropdown
                         title="Mois"
                         options={months}
@@ -145,7 +145,7 @@ const StudentPayments = () => {
                         setSelected={setSelectedTeacher}
                     />
                 </div>
-                <div className="w-1/2">
+                <div className="w-1/2 flex justify-center items-center">
                     <StudentsPaymentsDisplayTable payments={filteredPayments} />
                 </div>
             </div>

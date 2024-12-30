@@ -3,6 +3,7 @@ import { UserType } from "../../Types/constants"
 import Documents from "../../Pages/main/Student/Documents";
 import SingleTeacherDocuments from "../../Pages/main/Student/SingleTeacherDocuments";
 import StudentPayments from "../../Pages/main/Student/StudentPayments";
+import Courses from "../../Pages/main/Student/Courses";
 
 const MainRoutesWrapper = () => {
   const userRole = UserType.student;   //for test only , so we can have unified routes , later we will fetch to get this value
@@ -15,6 +16,7 @@ const MainRoutesWrapper = () => {
               <Route path="documents" element={<Documents />} />
               <Route path="documents/:id" element={<SingleTeacherDocuments />} />
               <Route path="payments" element={<StudentPayments />} />
+              <Route path="courses" element={<Courses />} />
             </>
             :
             <>

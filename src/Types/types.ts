@@ -1,5 +1,5 @@
 import { IconType } from "react-icons";
-import { Level, PaymentStatus, SubjectNames, UserType } from "./constants";
+import { CourseType, Level, PaymentStatus, SubjectNames, UserType } from "./constants";
 
 export interface RegisterUser {
     name:  string;
@@ -49,6 +49,16 @@ export interface StudentPayment {
     paymentStatus : PaymentStatus;
 };
 
+
+export interface Course {
+    id : string;
+    type : CourseType;
+    teacherId : string;
+    teacherName : string;
+    location? : string;
+    time : Date | string;
+    subject : string;
+};
 
 
 
