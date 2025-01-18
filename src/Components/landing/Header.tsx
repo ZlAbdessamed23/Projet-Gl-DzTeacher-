@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
-import { Primary, CEM, Lycee, College } from "../../Types/constants";
+import { Primary, CEM, Lycee } from "../../Types/constants";
 
 const Header: React.FC = () => {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
@@ -95,32 +95,6 @@ const Header: React.FC = () => {
                       className="p-2 hover:bg-gray-200 font-light"
                     >
                       <a href={`#lycee-${index + 1}`}>{level}</a>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </li>
-            {/* College */}
-            <li className="relative">
-              <button
-                onClick={() => toggleMenu("college")}
-                className="flex items-center hover:text-gray-300"
-              >
-                Université{" "}
-                <span className="ml-2 text-2xl font-mono transform rotate-90">
-                  &gt;
-                </span>
-              </button>
-              {activeMenu === "college" && (
-                <ul
-                  className={`absolute left-0 mt-2 bg-secondary-color text-main-color shadow-md rounded-md ${dropdownAnimation}`}
-                >
-                  {Object.values(College).map((level, index) => (
-                    <li
-                      key={index}
-                      className="p-2 hover:bg-gray-200 font-light"
-                    >
-                      <a href={`#college-${index + 1}`}>{level}</a>
                     </li>
                   ))}
                 </ul>

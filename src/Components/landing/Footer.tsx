@@ -10,15 +10,9 @@ const Footer: React.FC = () => {
     <footer className="bg-main-color font-poppins text-white">
       <div className=" bg-ternary-color py-4">
         <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between text-center md:text-left">
-          <p className="tracking-ultraWide text-2xl font-semibold italic ml-64 py-6">
+          <p className="tracking-ultraWide text-2xl font-semibold italic ml-80 py-6">
             Rejoignez-nous pour une meilleure éducation !
           </p>
-          <a
-            href="#"
-            className="bg-light font-lora text-white text-xl tracking-widest px-6 py-2 mr-14 rounded-xl hover:bg-teal-700 hover:tracking-ultraWide transition-all"
-          >
-            JOIN US
-          </a>
         </div>
       </div>
 
