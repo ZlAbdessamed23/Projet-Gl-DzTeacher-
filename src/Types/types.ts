@@ -32,6 +32,21 @@ export interface TeacherInfos {
   subject: string;
 }
 
+export interface Teacher {
+  name: string;
+  level: Level[];
+  location: string;
+  subject: string[];
+  experience : string;
+  diploma : string;
+  available : CourseType;
+  tarifs : string [];
+  contacts : {
+    phone : string;
+    email : string
+  };  
+};
+
 export interface Document extends LightDocument {
   title: string;
   description: string;

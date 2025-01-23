@@ -9,11 +9,11 @@ import TeacherCourses from "../../Pages/main/Teacher/TeacherCourses";
 import Courses from "../../Pages/main/Student/Courses";
 
 const MainRoutesWrapper = () => {
-  const userRole = UserType.teacher; //for test only , so we can have unified routes , later we will fetch to get this value
+  const userRole = UserType.student; //for test only , so we can have unified routes , later we will fetch to get this value
   return (
     <div className="flex-grow">
       <Routes>
-        {userRole === UserType.teacher ? (
+        {userRole === UserType.student ? (
           <>
             <Route path="documents" element={<TeacherDocuments />} />
             <Route path="payments" element={<TeacherPayments />} />

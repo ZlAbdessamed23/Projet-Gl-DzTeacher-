@@ -28,22 +28,22 @@ const siderBarItems: Array<SideBarItemType> = [
   {
     name: "Cours",
     Icon: MdLibraryBooks,
-    url: "",
+    url: "/main/courses",
   },
   {
     name: "Paiements",
     Icon: FaMoneyCheckDollar,
-    url: "",
+    url: "/main/payments",
   },
   {
     name: "Documents",
     Icon: IoDocumentText,
-    url: "",
+    url: "/main/documents",
   },
   {
     name: "Profile",
     Icon: CgProfile,
-    url: "",
+    url: "/main/profile",
   },
 ];
 

@@ -1,9 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import MainPagesWrapper from "../../../Components/main/MainPagesWrapper";
-import { PaymentStatus } from "../../../Types/constants";
-import { StudentPayment } from "../../../Types/types";
-import { Student } from "../../../Types/types";
 import StudentsDisplayTable from "../../../Components/main/StudentsDisplayTable";
 import AddStudentModal from "../../../Components/main/Modals/AddStudentModal";
 
@@ -67,9 +64,8 @@ const Dropdown = ({
         </div>
         <span className="text-lg font-medium">{selected || title}</span>
         <MdKeyboardArrowDown
-          className={`size-8 transform transition-transform ${
-            isOpen ? "rotate-180" : ""
-          }`}
+          className={`size-8 transform transition-transform ${isOpen ? "rotate-180" : ""
+            }`}
         />
       </div>
       {isOpen && (

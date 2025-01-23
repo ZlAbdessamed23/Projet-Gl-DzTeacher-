@@ -1,4 +1,3 @@
-import LightDocumentDisplay from "../../../Components/main/LightDocumentDisplay";
 import MainPagesWrapper from "../../../Components/main/MainPagesWrapper";
 import DocumentDisplay from "../../../Components/main/DocumentDisplay";
 import { MdKeyboardArrowDown } from "react-icons/md";
