@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Course } from "../../../Types/types";
-import StudentCourseDisplay from "../StudentCourseDisplay";
+import StudentCourseDisplay from "./StudentCourseDisplay";
 import {
   MdOutlineKeyboardArrowRight,
   MdOutlineKeyboardArrowLeft,
@@ -94,7 +94,7 @@ const TeacherCoursesCalendar: React.FC<TeacherCoursesCalendarProps> = ({
                   key={date.toISOString()}
                   className="px-4 py-2 text-center bg-[#E0F7F9]"
                 >
-                  <div className="text-ternary-dark-color text-xl font-medium">
+                  <div className="text-ternary-dark-color text-xl  font-semibold">
                     {dayName}
                   </div>
                   <div className="text-ternary-color text-4xl pl-4 font-bold">

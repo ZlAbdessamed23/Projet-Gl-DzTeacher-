@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import MainPagesWrapper from "../../../Components/main/MainPagesWrapper";
-import StudentsDisplayTable from "../../../Components/main/StudentsDisplayTable";
+import StudentsDisplayTable from "../../../Components/main/Teacher/StudentsDisplayTable";
 import AddStudentModal from "../../../Components/main/Modals/AddStudentModal";
 
 const months = [
@@ -64,8 +64,9 @@ const Dropdown = ({
         </div>
         <span className="text-lg font-medium">{selected || title}</span>
         <MdKeyboardArrowDown
-          className={`size-8 transform transition-transform ${isOpen ? "rotate-180" : ""
-            }`}
+          className={`size-8 transform transition-transform ${
+            isOpen ? "rotate-180" : ""
+          }`}
         />
       </div>
       {isOpen && (

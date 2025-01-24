@@ -3,8 +3,8 @@ import { FaUserLargeSlash } from "react-icons/fa6";
 import { FaUserPen } from "react-icons/fa6";
 import { FaCheck } from "react-icons/fa6";
 import { BsXCircleFill } from "react-icons/bs";
-import ModifyModal from "./Modals/ModifyModal";
-import DeleteModal from "./Modals/DeleteModal";
+import ModifyModal from "../Modals/ModifyModal";
+import DeleteModal from "../Modals/DeleteModal";
 
 interface Student {
   id: string;
@@ -115,6 +115,7 @@ const StudentDisplayTable: React.FC<StudentDisplayTableProps> = ({
         onApply={handleApplyChanges}
       />
       <DeleteModal
+        type="student"
         isOpen={isDeleteModalOpen}
         onClose={handleCloseDelete}
         onConfirm={handleConfirmDelete}

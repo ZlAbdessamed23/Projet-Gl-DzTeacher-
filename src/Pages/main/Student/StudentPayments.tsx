@@ -3,7 +3,7 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import MainPagesWrapper from "../../../Components/main/MainPagesWrapper";
 import { PaymentStatus } from "../../../Types/constants";
 import { StudentPayment } from "../../../Types/types";
-import StudentsPaymentsDisplayTable from "../../../Components/main/StudentsPaymentsDisplayTable";
+import StudentsPaymentsDisplayTable from "../../../Components/main/Student/StudentsPaymentsDisplayTable";
 
 const months = [
   "Janvier",

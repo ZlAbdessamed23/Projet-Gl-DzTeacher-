@@ -1,12 +1,13 @@
-import React from 'react';
-import { StudentPayment } from '../../Types/types';
-
+import React from "react";
+import { StudentPayment } from "../../../Types/types";
 
 interface StudentsPaymentsDisplayTableProps {
   payments: StudentPayment[];
 }
 
-const StudentsPaymentsDisplayTable: React.FC<StudentsPaymentsDisplayTableProps> = ({ payments }) => {
+const StudentsPaymentsDisplayTable: React.FC<
+  StudentsPaymentsDisplayTableProps
+> = ({ payments }) => {
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full table-auto">
