@@ -81,7 +81,7 @@ const fakePayments: StudentPayment[] = [
   },
 ];
 
-const Dropdown = ({
+export const Dropdown = ({
   title,
   options,
   selected,
