@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 import MainPagesWrapper from "../../../Components/main/MainPagesWrapper";
 import StudentCoursesCalendar from "../../../Components/main/StudentCoursesCalendar";
 import { Course } from "../../../Types/types";
@@ -6,6 +7,7 @@ import { getStudentCourses } from "../../../utils/fetchfuncs";
 import { CourseType } from "../../../Types/constants";
 
 const Courses = () => {
+  const [cookies] = useCookies(['token']);
   const [courses, setCourses] = useState<Course[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -61,7 +63,7 @@ const Courses = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const data = await getStudentCourses();
+        const data = await getStudentCourses(cookies.token);
         setCourses(data);
       } catch (err) {
         setError("Failed to fetch courses. Please try again later.");
@@ -70,8 +72,13 @@ const Courses = () => {
       }
     };
 
-    fetchCourses();
-  }, []);
+    if (cookies.token) {
+      fetchCourses();
+    } else {
+      setError("No authentication token found");
+      setLoading(false);
+    }
+  }, [cookies.token]);
 
   return (
     <MainPagesWrapper subTitle="" title="Tableau de Bord des Séances">

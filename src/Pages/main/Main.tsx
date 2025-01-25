@@ -4,8 +4,9 @@ import Sidebar from "../../Components/main/Sidebar";
 
 const Main = () => {
   return (
-    <div className="w-screen min-h-screen flex flex-col overflow-hidden">
-      <div className="flex flex-grow">
+    <div className="w-screen flex flex-col overflow-hidden">
+      {/* Flex container for Sidebar and MainPagesWrapper */}
+      <div className="flex flex-1">
         <Sidebar />
         <MainPagesWrapper />
       </div>
