@@ -73,7 +73,6 @@ const subjects = [
   "Chimie",
   "Biologie",
   "Histoire",
-  "Tous",
 ];
 
 const fakeFile = new File(["content"], "example.txt", { type: "text/plain" });

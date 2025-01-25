@@ -63,17 +63,6 @@ const AddModal: React.FC<AddModalProps> = ({ isOpen, onClose, onApply }) => {
             </div>
           </div>
 
-          <div className="gap-x-3 mb-4 flex">
-            <label className="leading-[2.5] text-main-color text-lg">
-              Groupe:
-            </label>
-            <input
-              className="block w-[30%] mt-1 p-2 bg-[#B6D6CFA6]"
-              type="text"
-              value="01"
-              readOnly
-            />
-          </div>
           <div className="flex justify-end gap-4">
             <button
               type="button"

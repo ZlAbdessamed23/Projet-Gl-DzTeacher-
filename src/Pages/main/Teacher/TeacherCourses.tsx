@@ -1,64 +1,57 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useCookies } from "react-cookie";
 import MainPagesWrapper from "../../../Components/main/MainPagesWrapper";
 import TeacherCoursesCalendar from "../../../Components/main/Teacher/TeacherCoursesCalendar";
-import { CourseType } from "../../../Types/constants";
 import { Course } from "../../../Types/types";
 import AddCourseModal from "../../../Components/main/Modals/AddCourseModal";
+import { getTeacherCourses, addTeacherCourse } from "../../../utils/fetchfuncs"; // Assume these exist
 
 const TeacherCourses = () => {
+  const [cookies] = useCookies(["token"]);
+  const [courses, setCourses] = useState<Course[] | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
-  const handleAddStudent = (data: Course) => {
-    console.log("New Course Added");
-    console.log(data);
-  };
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        if (!cookies.token) {
+          setError("Authentication required");
+          setLoading(false);
+          return;
+        }
 
-  const fixedCourseData: Course[] = [
-    {
-      id: "C001",
-      type: CourseType.local,
-      teacherId: "T001",
-      teacherName: "John Doe",
-      location: "Room 101",
-      time: new Date(),
-      subject: "Mathematics",
-    },
-    {
-      id: "C002",
-      type: CourseType.online,
-      teacherId: "T002",
-      teacherName: "Jane Smith",
-      location: "Room 202",
-      time: new Date(new Date().setDate(new Date().getDate() + 2)),
-      subject: "Physics",
-    },
-    {
-      id: "C003",
-      type: CourseType.online,
-      teacherId: "T003",
-      teacherName: "Emily Johnson",
-      location: "Lab 1",
-      time: new Date(new Date().setDate(new Date().getDate() + 4)),
-      subject: "Chemistry",
-    },
-    {
-      id: "C004",
-      type: CourseType.local,
-      teacherId: "T004",
-      teacherName: "Michael Brown",
-      location: "Room 303",
-      time: new Date(new Date().setHours(new Date().getHours() + 1)),
-      subject: "Biology",
-    },
-    {
-      id: "C005",
-      type: CourseType.online,
-      teacherId: "T005",
-      teacherName: "Sarah Davis",
-      time: new Date(new Date().setHours(new Date().getHours() + 4)),
-      subject: "Computer Science",
-    },
-  ];
+        const data = await getTeacherCourses(cookies.token);
+        setCourses(data);
+      } catch (err) {
+        setError("Failed to fetch courses. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, [cookies.token]);
+
+  const handleAddCourse = async (newCourse: Course) => {
+    try {
+      if (!cookies.token) {
+        setError("Authentication required");
+        return;
+      }
+
+      // Post new course to API
+      await addTeacherCourse(cookies.token, newCourse);
+
+      // Refresh course list
+      const updatedCourses = await getTeacherCourses(cookies.token);
+      setCourses(updatedCourses);
+    } catch (err) {
+      console.error("Failed to add course:", err);
+      setError("Failed to add new course");
+    }
+  };
 
   return (
     <MainPagesWrapper subTitle="" title="Tableau de Bord des Séances">
@@ -69,13 +62,22 @@ const TeacherCourses = () => {
         >
           Ajouter un nouveau évènement
         </button>
-        <TeacherCoursesCalendar courses={fixedCourseData} />
+
+        {loading ? (
+          <p>Chargement des séances...</p>
+        ) : error ? (
+          <p className="text-red-500">{error}</p>
+        ) : courses ? (
+          <TeacherCoursesCalendar courses={courses} />
+        ) : (
+          <p>Aucune séance planifiée</p>
+        )}
       </div>
 
       <AddCourseModal
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
-        onApply={handleAddStudent}
+        onApply={handleAddCourse}
       />
     </MainPagesWrapper>
   );
