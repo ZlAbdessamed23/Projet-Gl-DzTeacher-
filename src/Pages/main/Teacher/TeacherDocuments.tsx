@@ -154,7 +154,6 @@ const TeacherDocuments: React.FC = () => {
         <div className="px-6 pt-6 bg-secondary-color flex flex-col gap-y-40">
           <div className="rounded-xl border-2 border-ternary-color py-4 w-full mx-auto flex flex-col gap-4 bg-secondary-color">
             <div className=" mx-20 my-5">
-              {" "}
               <h2 className="text-3xl font-medium text-main-color mb-4">
                 Ajouter un document
               </h2>
@@ -195,6 +194,7 @@ const TeacherDocuments: React.FC = () => {
                     <label className="text-xl font-medium">
                       Titre de support :
                     </label>
+
                     <input
                       type="text"
                       className="w-[320px] px-3 py-2 border rounded-md"
@@ -211,12 +211,12 @@ const TeacherDocuments: React.FC = () => {
                   <div>
                     <div className="flex gap-x-6">
                       {" "}
-                      <label className=" text-xl font-medium mb-1">
+                      <label className=" text-xl w-[180px] font-medium mb-1">
                         Votre fichier :
                       </label>
                       <input
                         type="file"
-                        className="w-[80%]"
+                        className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-main-color hover:file:bg-ternary-light-color"
                         onChange={(e) =>
                           setNewDocument({
                             ...newDocument,

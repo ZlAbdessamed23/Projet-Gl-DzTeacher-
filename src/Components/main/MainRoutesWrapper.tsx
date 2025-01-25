@@ -7,6 +7,7 @@ import TeacherPayments from "../../Pages/main/Teacher/TeacherPayments";
 import TeacherDocuments from "../../Pages/main/Teacher/TeacherDocuments";
 import TeacherCourses from "../../Pages/main/Teacher/TeacherCourses";
 import Courses from "../../Pages/main/Student/Courses";
+import TeacherProfile from "../../Pages/main/Teacher/TeacherProfile";
 
 const MainRoutesWrapper = () => {
   const userRole = UserType.student; //for test only , so we can have unified routes , later we will fetch to get this value
@@ -18,6 +19,7 @@ const MainRoutesWrapper = () => {
             <Route path="documents" element={<TeacherDocuments />} />
             <Route path="payments" element={<TeacherPayments />} />
             <Route path="courses" element={<TeacherCourses />} />
+            <Route path="profile" element={<TeacherProfile />} />
           </>
         ) : (
           <>
