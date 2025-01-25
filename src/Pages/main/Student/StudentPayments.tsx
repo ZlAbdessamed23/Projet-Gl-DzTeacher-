@@ -1,33 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useCookies } from "react-cookie";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import MainPagesWrapper from "../../../Components/main/MainPagesWrapper";
-import { PaymentStatus } from "../../../Types/constants";
 import { StudentPayment } from "../../../Types/types";
 import StudentsPaymentsDisplayTable from "../../../Components/main/Student/StudentsPaymentsDisplayTable";
+import { getStudentPayments } from "../../../utils/fetchfuncs";
 
 const months = [
-  "Janvier",
-  "Février",
-  "Mars",
-  "Avril",
-  "Mai",
-  "Juin",
-  "Juillet",
-  "Août",
-  "Septembre",
-  "Octobre",
-  "Novembre",
-  "Décembre",
-  "Tous",
+  "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", 
+  "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre", "Tous"
 ];
 
 const subjects = [
-  "Mathématiques",
-  "Physique",
-  "Chimie",
-  "Biologie",
-  "Histoire",
-  "Tous",
+  "Mathématiques", "Physique", "Chimie", "Biologie", "Histoire", "Tous"
 ];
 
 const teachers = [
@@ -35,50 +20,7 @@ const teachers = [
   { id: 2, teacherName: "M. Durand" },
   { id: 3, teacherName: "Mme Lefevre" },
   { id: 4, teacherName: "M. Bernard" },
-  { id: 5, teacherName: "Tous" },
-];
-
-const fakePayments: StudentPayment[] = [
-  {
-    id: "1",
-    month: "Janvier",
-    teacherId: "1",
-    teacherName: "Mme Dupont",
-    subject: "Mathématiques",
-    paymentStatus: PaymentStatus.Payed,
-  },
-  {
-    id: "2",
-    month: "Février",
-    teacherId: "2",
-    teacherName: "M. Durand",
-    subject: "Physique",
-    paymentStatus: PaymentStatus.notPayed,
-  },
-  {
-    id: "3",
-    month: "Mars",
-    teacherId: "3",
-    teacherName: "Mme Lefevre",
-    subject: "Chimie",
-    paymentStatus: PaymentStatus.pending,
-  },
-  {
-    id: "4",
-    month: "Avril",
-    teacherId: "4",
-    teacherName: "M. Bernard",
-    subject: "Biologie",
-    paymentStatus: PaymentStatus.Payed,
-  },
-  {
-    id: "5",
-    month: "Mai",
-    teacherId: "5",
-    teacherName: "Tous",
-    subject: "Histoire",
-    paymentStatus: PaymentStatus.notPayed,
-  },
+  { id: 5, teacherName: "Tous" }
 ];
 
 export const Dropdown = ({
@@ -105,9 +47,7 @@ export const Dropdown = ({
         </div>
         <span className="text-lg font-medium">{selected || title}</span>
         <MdKeyboardArrowDown
-          className={`size-8 transform transition-transform ${
-            isOpen ? "rotate-180" : ""
-          }`}
+          className={`size-8 transform transition-transform ${isOpen ? "rotate-180" : ""}`}
         />
       </div>
       {isOpen && (
@@ -132,12 +72,35 @@ export const Dropdown = ({
 };
 
 const StudentPayments = () => {
+  const [cookies] = useCookies(['token']);
   const [selectedMonth, setSelectedMonth] = useState("Tous");
   const [selectedSubject, setSelectedSubject] = useState("Tous");
   const [selectedTeacher, setSelectedTeacher] = useState("Tous");
+  const [payments, setPayments] = useState<StudentPayment[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Filter payments based on selected filters
-  const filteredPayments = fakePayments.filter((payment) => {
+  useEffect(() => {
+    const fetchPayments = async () => {
+      try {
+        const data = await getStudentPayments(cookies.token);
+        setPayments(data);
+      } catch (err) {
+        setError("Failed to fetch payments. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (cookies.token) {
+      fetchPayments();
+    } else {
+      setError("No authentication token found");
+      setLoading(false);
+    }
+  }, [cookies.token]);
+
+  const filteredPayments = payments.filter((payment) => {
     const monthMatch =
       selectedMonth === "Tous" || payment.month === selectedMonth;
     const subjectMatch =
@@ -174,7 +137,13 @@ const StudentPayments = () => {
           />
         </div>
         <div className="w-1/2 flex justify-center items-center">
-          <StudentsPaymentsDisplayTable payments={filteredPayments} />
+          {loading ? (
+            <p>Loading...</p>
+          ) : error ? (
+            <p className="text-red-500">{error}</p>
+          ) : (
+            <StudentsPaymentsDisplayTable payments={filteredPayments} />
+          )}
         </div>
       </div>
     </MainPagesWrapper>

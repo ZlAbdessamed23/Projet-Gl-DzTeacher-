@@ -29,45 +29,55 @@ export const login = async (user: LoginUser) => {
   }
 };
 
-export const getTeachers = async () => {
+export const getTeachers = async (token: string) => {
   try {
-    const response = await axios.get<Teacher[]>(`${API_URL}/teachers`);
+    const response = await axios.get<Teacher[]>(`${API_URL}/teachers`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
     return response.data;
   } catch (error) {
     throw error;
   }
 };
 
-export const getStudentCourses = async () => {
+export const getStudentCourses = async (token: string) => {
   try {
-    const response = await axios.get<Course[]>(`${API_URL}/student/courses`);
+    const response = await axios.get<Course[]>(`${API_URL}/student/courses`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
     return response.data;
   } catch (error) {
     throw error;
   }
 };
 
-export const getStudentPayments = async () => {
+export const getStudentPayments = async (token: string) => {
   try {
-    const response = await axios.get<StudentPayment[]>(`${API_URL}/student/payments`);
+    const response = await axios.get<StudentPayment[]>(`${API_URL}/student/payments`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
     return response.data;
   } catch (error) {
     throw error;
   }
 };
 
-export const getStudentDocuments = async () => {
+export const getStudentDocuments = async (token: string) => {
   try {
-    const response = await axios.get<Document[]>(`${API_URL}/student/documents`);
+    const response = await axios.get<Document[]>(`${API_URL}/student/documents`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
     return response.data;
   } catch (error) {
     throw error;
   }
 };
 
-export const getStudentDocumentById = async (documentId: string) => {
+export const getStudentDocumentById = async (documentId: string, token: string) => {
   try {
-    const response = await axios.get<LightDocument>(`${API_URL}/student/documents/${documentId}`);
+    const response = await axios.get<Document>(`${API_URL}/student/documents/${documentId}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
     return response.data;
   } catch (error) {
     throw error;

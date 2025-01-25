@@ -1,19 +1,24 @@
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { FaUser, FaEnvelope, FaLock } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { RegisterUser } from '../../Types/types';
 import { UserType } from '../../Types/constants';
+import { signup } from '../../utils/fetchfuncs';
 
 const SignupForm = () => {
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm<RegisterUser>();
 
-    const onSubmit: SubmitHandler<RegisterUser> = (data) => {
-        console.log('Registered User:', data);
+    const onSubmit: SubmitHandler<RegisterUser> = async(data) => {
+        const res = await signup(data);
+        if(res){
+            navigate("/login");
+        };
     };
 
     return (

@@ -1,9 +1,16 @@
-import MainPagesWrapper from "../../../Components/main/MainPagesWrapper"
+import React, { useEffect, useState } from "react";
+import MainPagesWrapper from "../../../Components/main/MainPagesWrapper";
 import StudentCoursesCalendar from "../../../Components/main/StudentCoursesCalendar";
-import { CourseType } from "../../../Types/constants";
 import { Course } from "../../../Types/types";
+import { getStudentCourses } from "../../../utils/fetchfuncs";
+import { CourseType } from "../../../Types/constants";
 
 const Courses = () => {
+  const [courses, setCourses] = useState<Course[] | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fake data for later use
   const fixedCourseData: Course[] = [
     {
       id: "C001",
@@ -51,14 +58,36 @@ const Courses = () => {
     },
   ];
 
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const data = await getStudentCourses();
+        setCourses(data);
+      } catch (err) {
+        setError("Failed to fetch courses. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, []);
 
   return (
     <MainPagesWrapper subTitle="" title="Tableau de Bord des Séances">
       <div className="w-11/12 mx-auto">
-        <StudentCoursesCalendar courses={fixedCourseData} />
+        {loading ? (
+          <p>Loading...</p>
+        ) : error ? (
+          <p className="text-red-500">{error}</p>
+        ) : courses ? (
+          <StudentCoursesCalendar courses={courses} />
+        ) : (
+          <p>No courses available.</p>
+        )}
       </div>
     </MainPagesWrapper>
-  )
-}
+  );
+};
 
-export default Courses
+export default Courses;

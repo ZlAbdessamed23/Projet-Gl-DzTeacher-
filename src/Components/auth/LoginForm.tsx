@@ -1,18 +1,23 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { FaEnvelope, FaLock } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { LoginUser} from '../../Types/types';
 import { UserType } from '../../Types/constants';
+import { login } from '../../utils/fetchfuncs';
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginUser>();
 
-  const onSubmit: SubmitHandler<LoginUser> = (data) => {
-    console.log('Logged in User:', data);
+  const onSubmit: SubmitHandler<LoginUser> = async(data) => {
+    const res = await login(data);
+    if(res){
+      navigate("/main/courses");
+    };
   };
 
   return (
