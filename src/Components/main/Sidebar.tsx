@@ -19,22 +19,19 @@ const SidebarItem = ({
   const isActive = path === item.url;
   return (
     <Link
-      className={`h-14 w-full flex items-center gap-4 ${
-        isActive ? " text-white" : ""
-      }`}
+      className={`h-14 w-full flex items-center gap-4 ${isActive ? " text-white" : ""
+        }`}
       to={item.url}
     >
       <p
-        className={`text-xl font-semibold w-40 ${
-          isActive ? "text-white" : "text-ternary-dark-color"
-        }`}
+        className={`text-xl font-semibold w-40 ${isActive ? "text-white" : "text-ternary-dark-color"
+          }`}
       >
         {item.name}
       </p>
       <item.Icon
-        className={`size-8 ${
-          isActive ? "text-white" : "text-ternary-dark-color"
-        }`}
+        className={`size-8 ${isActive ? "text-white" : "text-ternary-dark-color"
+          }`}
       />
     </Link>
   );
@@ -44,29 +41,29 @@ const siderBarItems: Array<SideBarItemType> = [
   {
     name: "Cours",
     Icon: MdLibraryBooks,
-    url: "/main/courses",
+    url: "/main/student/courses",
   },
   {
     name: "Paiements",
     Icon: FaMoneyCheckDollar,
-    url: "/main/payments",
+    url: "/main/student/payments",
   },
   {
     name: "Documents",
     Icon: IoDocumentText,
-    url: "/main/documents",
+    url: "/main/student/documents",
   },
 ];
 
 const profile = {
   name: "Profile",
   Icon: CgProfile,
-  url: "/main/profile",
+  url: "/main/teacher/profile",
 };
 
 const Sidebar = () => {
   const location = useLocation();
-  const [Role, SetRole] = useState(UserType.teacher);
+  const [Role] = useState(UserType.teacher);
 
   return (
     <div className="flex flex-col bg-ternary-extra-light-color w-80">

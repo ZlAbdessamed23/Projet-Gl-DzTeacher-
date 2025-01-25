@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import MainPagesWrapper from "../../../Components/main/MainPagesWrapper";
 import StudentCoursesCalendar from "../../../Components/main/StudentCoursesCalendar";
@@ -10,9 +10,8 @@ const Courses = () => {
   const [cookies] = useCookies(['token']);
   const [courses, setCourses] = useState<Course[] | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
-  // Fake data for later use
+  // Fake data to be used in case of an error
   const fixedCourseData: Course[] = [
     {
       id: "C001",
@@ -65,8 +64,9 @@ const Courses = () => {
       try {
         const data = await getStudentCourses(cookies.token);
         setCourses(data);
-      } catch (err) {
-        setError("Failed to fetch courses. Please try again later.");
+      } catch {
+        // In case of any error, fallback to the fake data
+        setCourses(fixedCourseData);
       } finally {
         setLoading(false);
       }
@@ -75,7 +75,8 @@ const Courses = () => {
     if (cookies.token) {
       fetchCourses();
     } else {
-      setError("No authentication token found");
+      // Fallback to the fake data if no token is found
+      setCourses(fixedCourseData);
       setLoading(false);
     }
   }, [cookies.token]);
@@ -85,8 +86,6 @@ const Courses = () => {
       <div className="w-11/12 mx-auto">
         {loading ? (
           <p>Loading...</p>
-        ) : error ? (
-          <p className="text-red-500">{error}</p>
         ) : courses ? (
           <StudentCoursesCalendar courses={courses} />
         ) : (
