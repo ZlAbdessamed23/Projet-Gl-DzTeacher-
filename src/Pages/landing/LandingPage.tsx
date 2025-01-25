@@ -13,7 +13,7 @@ const LandingPage = () => {
         <Route path="/" element={<LandingPageMainBody />} />
         <Route path="/search" element={<LandingPageSearchPage />} />
         <Route
-          path="/subjects/:level?"
+          path="/subjects/:category/:level?"
           element={<LandidngPageSubjectsPage />}
         />
       </Routes>

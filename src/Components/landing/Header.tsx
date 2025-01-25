@@ -11,6 +11,10 @@ const Header: React.FC = () => {
     setActiveMenu((prev) => (prev === menu ? null : menu));
   };
 
+  const capitalizeFirstLetter = (str: string) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
   const dropdownAnimation = "transition-all duration-300 transform scale-95";
 
   return (
@@ -46,11 +50,13 @@ const Header: React.FC = () => {
                     >
                       <button
                         onClick={() =>
-                          navigate(`/subjects/${encodeURIComponent(level)}`)
+                          navigate(
+                            `/subjects/primary/${encodeURIComponent(level)}`
+                          )
                         }
                         className="w-full text-left"
                       >
-                        {level}
+                        {capitalizeFirstLetter(level)} année
                       </button>
                     </li>
                   ))}
@@ -80,11 +86,11 @@ const Header: React.FC = () => {
                     >
                       <button
                         onClick={() =>
-                          navigate(`/subjects/${encodeURIComponent(level)}`)
+                          navigate(`/subjects/cem/${encodeURIComponent(level)}`)
                         }
                         className="w-full text-left"
                       >
-                        {level}
+                        {capitalizeFirstLetter(level)} année
                       </button>
                     </li>
                   ))}
@@ -114,11 +120,13 @@ const Header: React.FC = () => {
                     >
                       <button
                         onClick={() =>
-                          navigate(`/subjects/${encodeURIComponent(level)}`)
+                          navigate(
+                            `/subjects/lycee/${encodeURIComponent(level)}`
+                          )
                         }
                         className="w-full text-left"
                       >
-                        {level}
+                        {capitalizeFirstLetter(level)} année
                       </button>
                     </li>
                   ))}
