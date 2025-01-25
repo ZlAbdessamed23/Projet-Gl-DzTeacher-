@@ -6,6 +6,8 @@ import { CgProfile } from "react-icons/cg";
 import { FaMoneyCheckDollar } from "react-icons/fa6";
 import { MdLibraryBooks } from "react-icons/md";
 import { IoDocumentText } from "react-icons/io5";
+import { useState } from "react";
+import { UserType } from "../../Types/constants";
 
 const SidebarItem = ({
   item,
@@ -17,19 +19,22 @@ const SidebarItem = ({
   const isActive = path === item.url;
   return (
     <Link
-      className={`h-14 w-full flex items-center gap-4 ${isActive ? " text-white" : ""
-        }`}
+      className={`h-14 w-full flex items-center gap-4 ${
+        isActive ? " text-white" : ""
+      }`}
       to={item.url}
     >
       <p
-        className={`text-xl font-semibold w-40 ${isActive ? "text-white" : "text-ternary-dark-color"
-          }`}
+        className={`text-xl font-semibold w-40 ${
+          isActive ? "text-white" : "text-ternary-dark-color"
+        }`}
       >
         {item.name}
       </p>
       <item.Icon
-        className={`size-8 ${isActive ? "text-white" : "text-ternary-dark-color"
-          }`}
+        className={`size-8 ${
+          isActive ? "text-white" : "text-ternary-dark-color"
+        }`}
       />
     </Link>
   );
@@ -51,15 +56,17 @@ const siderBarItems: Array<SideBarItemType> = [
     Icon: IoDocumentText,
     url: "/main/documents",
   },
-  {
-    name: "Profile",
-    Icon: CgProfile,
-    url: "/main/profile",
-  },
 ];
+
+const profile = {
+  name: "Profile",
+  Icon: CgProfile,
+  url: "/main/profile",
+};
 
 const Sidebar = () => {
   const location = useLocation();
+  const [Role, SetRole] = useState(UserType.teacher);
 
   return (
     <div className="flex flex-col bg-ternary-extra-light-color w-80">
@@ -92,6 +99,11 @@ const Sidebar = () => {
           {siderBarItems.map((item, index) => (
             <SidebarItem key={index} item={item} path={location.pathname} />
           ))}
+          {Role === UserType.teacher ? (
+            <SidebarItem item={profile} path={location.pathname} />
+          ) : (
+            <></>
+          )}
         </div>
         <div className="flex items-center justify-center p-4">
           <button className="w-40 h-11 bg-ternary-light-color text-white text-2xl rounded-lg">

@@ -8,13 +8,15 @@ import TeacherDocuments from "../../Pages/main/Teacher/TeacherDocuments";
 import TeacherCourses from "../../Pages/main/Teacher/TeacherCourses";
 import Courses from "../../Pages/main/Student/Courses";
 import TeacherProfile from "../../Pages/main/Teacher/TeacherProfile";
+import { useState } from "react";
 
 const MainRoutesWrapper = () => {
-  const userRole = UserType.student; //for test only , so we can have unified routes , later we will fetch to get this value
+  const [Role, SetRole] = useState<UserType>(UserType.teacher);
+
   return (
     <div className="flex-grow">
       <Routes>
-        {userRole === UserType.student ? (
+        {Role === UserType.teacher ? (
           <>
             <Route path="documents" element={<TeacherDocuments />} />
             <Route path="payments" element={<TeacherPayments />} />
