@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Course } from "../../../Types/types";
 import DeleteModal from "../Modals/DeleteModal";
-import ModifyModal from "../Modals/ModifyModal";
+import AddCourseModal from "../Modals/AddCourseModal";
 
 const StudentCourseDisplay = ({ course }: { course: Course }) => {
   const time = new Date(course.time).toLocaleTimeString([], {
@@ -9,22 +9,20 @@ const StudentCourseDisplay = ({ course }: { course: Course }) => {
     minute: "2-digit",
   });
 
-  const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
-  const handleModify = () => setIsModifyModalOpen(true);
-  const handleDelete = () => setIsDeleteModalOpen(true);
-
-  const handleCloseModify = () => setIsModifyModalOpen(false);
-  const handleCloseDelete = () => setIsDeleteModalOpen(false);
-
-  const handleApplyChanges = () => {
-    console.log("Changes applied.");
-    setIsModifyModalOpen(false);
+  const handleAddCourse = (data: Course) => {
+    console.log("New Course Added");
+    console.log(data);
   };
 
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const handleDelete = () => setIsDeleteModalOpen(true);
+  const handleCloseDelete = () => setIsDeleteModalOpen(false);
+
   const handleConfirmDelete = () => {
-    console.log("Student deleted.");
+    console.log("Course deleted.");
     setIsDeleteModalOpen(false);
   };
 
@@ -53,7 +51,7 @@ const StudentCourseDisplay = ({ course }: { course: Course }) => {
         )}
         <div className="flex justify-between items-center space-x-2 pt-4 pb-2">
           <button
-            onClick={() => handleModify()}
+            onClick={() => setIsAddModalOpen(true)}
             className="bg-[#2097A7] text-white px-4 py-2 rounded-md hover:bg-[#27b7c9]"
           >
             Modifier
@@ -67,11 +65,12 @@ const StudentCourseDisplay = ({ course }: { course: Course }) => {
         </div>
       </div>
 
-      <ModifyModal
-        isOpen={isModifyModalOpen}
-        onClose={handleCloseModify}
-        onApply={handleApplyChanges}
+      <AddCourseModal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        onApply={handleAddCourse}
       />
+
       <DeleteModal
         type="course"
         isOpen={isDeleteModalOpen}

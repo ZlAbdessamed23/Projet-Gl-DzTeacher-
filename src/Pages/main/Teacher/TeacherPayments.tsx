@@ -29,15 +29,99 @@ const subjects = [
   "Tous",
 ];
 
-const groupes = Array.from({ length: 6 }, (_, index) => `Groupe ${index + 1}`);
+const Level = ["Primary", "Cem", "Lycee", "Tous"];
 
 const initialStudents = [
-  { id: "1", lastName: "Ahmed", firstName: "Drouhi.F", status: "Payé" },
-  { id: "2", lastName: "Mounir", firstName: "Floubi.A", status: "Non payé" },
-  { id: "3", lastName: "Knhss", firstName: "Lamka.V", status: "Non payé" },
-  { id: "4", lastName: "Sbnvh", firstName: "Cgshn.H", status: "Payé" },
-  { id: "5", lastName: "Ctreye", firstName: "Youo.B", status: "Non payé" },
-  { id: "6", lastName: "Bvcyt", firstName: "Lino.S", status: "Payé" },
+  {
+    id: "1",
+    lastName: "Ahmed",
+    firstName: "Drouhi",
+    month: "Janvier",
+    subject: "Mathématiques",
+    level: "Primary",
+    status: "Payé",
+  },
+  {
+    id: "2",
+    lastName: "Mounir",
+    firstName: "Floubi",
+    month: "Février",
+    subject: "Physique",
+    level: "Cem",
+    status: "Non payé",
+  },
+  {
+    id: "3",
+    lastName: "Knhss",
+    firstName: "Lamka",
+    month: "Mars",
+    subject: "Chimie",
+    level: "Lycee",
+    status: "Non payé",
+  },
+  {
+    id: "4",
+    lastName: "Sbnvh",
+    firstName: "Cgshn",
+    month: "Avril",
+    subject: "Biologie",
+    level: "Primary",
+    status: "Payé",
+  },
+  {
+    id: "5",
+    lastName: "Ctreye",
+    firstName: "Youo",
+    month: "Mai",
+    subject: "Histoire",
+    level: "Cem",
+    status: "Non payé",
+  },
+  {
+    id: "6",
+    lastName: "Bvcyt",
+    firstName: "Lino",
+    month: "Juin",
+    subject: "Mathématiques",
+    level: "Lycee",
+    status: "Payé",
+  },
+  {
+    id: "7",
+    lastName: "Ait",
+    firstName: "Salah",
+    month: "Juillet",
+    subject: "Physique",
+    level: "Primary",
+    status: "Non payé",
+  },
+  {
+    id: "8",
+    lastName: "Ben",
+    firstName: "Omar",
+    month: "Août",
+    subject: "Chimie",
+    level: "Cem",
+    status: "Payé",
+  },
+  {
+    id: "9",
+    lastName: "Zidane",
+    firstName: "Mehdi",
+    month: "Septembre",
+    subject: "Biologie",
+    level: "Lycee",
+    status: "Non payé",
+  },
+  {
+    id: "10",
+    lastName: "El",
+    firstName: "Kheir",
+    month: "Octobre",
+    subject: "Histoire",
+    level: "Primary",
+    status: "Payé",
+  },
 ];
 
 const Dropdown = ({
@@ -93,24 +177,30 @@ const Dropdown = ({
 const TeacherPayments = () => {
   const [selectedMonth, setSelectedMonth] = useState("Tous");
   const [selectedSubject, setSelectedSubject] = useState("Tous");
-  const [selectedGroup, setSelectedGroup] = useState("Tous");
+  const [selectedLevel, setSelectedLevel] = useState("Tous");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   const handleAddStudent = () => {
     console.log("New student has been added to the Db");
   };
-  //   const [selectedTeacher, setSelectedTeacher] = useState("Tous");
 
-  // Filter payments based on selected filters
-  //   const filteredPayments = fakePayments.filter((payment) => {
-  //     const monthMatch =
-  //       selectedMonth === "Tous" || payment.month === selectedMonth;
-  //     const subjectMatch =
-  //       selectedSubject === "Tous" || payment.subject === selectedSubject;
-  //     const teacherMatch =
-  //       selectedTeacher === "Tous" || payment.teacherName === selectedTeacher;
-  //     return monthMatch && subjectMatch && teacherMatch;
-  //   });
+  const filterStudents = () => {
+    return initialStudents.filter((student) => {
+      const matchesMonth =
+        selectedMonth === "Tous" ||
+        (student.month && student.month === selectedMonth);
+      const matchesSubject =
+        selectedSubject === "Tous" ||
+        (student.subject && student.subject === selectedSubject);
+      const matchesLevel =
+        selectedLevel === "Tous" ||
+        (student.level && student.level === selectedLevel);
+
+      return matchesMonth && matchesSubject && matchesLevel;
+    });
+  };
+
+  const filteredStudents = filterStudents();
 
   return (
     <MainPagesWrapper
@@ -127,21 +217,15 @@ const TeacherPayments = () => {
           />
           <Dropdown
             title="Niveau"
-            options={subjects}
-            selected={selectedSubject}
-            setSelected={setSelectedSubject}
+            options={Level}
+            selected={selectedLevel}
+            setSelected={setSelectedLevel}
           />
           <Dropdown
             title="Matières"
             options={subjects}
             selected={selectedSubject}
             setSelected={setSelectedSubject}
-          />
-          <Dropdown
-            title="Groupe"
-            options={groupes}
-            selected={selectedGroup}
-            setSelected={setSelectedGroup}
           />
         </div>
         <div className="w-1/2 flex flex-col gap-y-8 justify-center items-center">
@@ -151,7 +235,7 @@ const TeacherPayments = () => {
           >
             Ajouter un nouveau étudiant
           </button>
-          <StudentsDisplayTable students={initialStudents} />
+          <StudentsDisplayTable students={filteredStudents} />
         </div>
       </div>
 

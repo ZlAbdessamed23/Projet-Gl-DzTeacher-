@@ -1,58 +1,6 @@
-import { useState } from "react";
 import MainPagesWrapper from "../../../Components/main/MainPagesWrapper";
 import TeacherCard from "../../../Components/main/Teacher/TeacherCard";
 import { CourseType, Level, SubjectNames } from "../../../Types/constants";
-import { MdKeyboardArrowDown } from "react-icons/md";
-
-const Dropdown = ({
-  title,
-  options,
-  selected,
-  setSelected,
-}: {
-  title: string;
-  options: string[];
-  selected: string;
-  setSelected: (value: string) => void;
-}) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <div
-      className={`relative bg-[#90CBD633] border border-ternary-color rounded-md px-4 py-2 w-72 cursor-pointer`}
-      onClick={() => setIsOpen(!isOpen)}
-    >
-      <div className="flex justify-between items-center">
-        <div className="absolute top-0 left-2 text-xs text-gray-700 font-medium">
-          {title}
-        </div>
-        <span className="text-lg font-medium">{selected || title}</span>
-        <MdKeyboardArrowDown
-          className={`size-8 transform text-[#3a3838]  transition-transform ${
-            isOpen ? "rotate-180" : ""
-          }`}
-        />
-      </div>
-      {isOpen && (
-        <ul className="absolute top-full left-0 w-full bg-white border border-ternary-color rounded-md mt-2 z-10">
-          {options.map((option) => (
-            <li
-              key={option}
-              className="px-4 py-2 text-sm hover:bg-gray-100"
-              onClick={(e) => {
-                e.stopPropagation();
-                setSelected(option);
-                setIsOpen(false);
-              }}
-            >
-              {option}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-};
 
 var teacher = {
   name: "Alice Johnson",
@@ -109,11 +57,12 @@ const TeacherProfile = () => {
                     <label className="text-[#002027] text-lg font-normal mr-4">
                       Niveaux :
                     </label>
-                    <input
-                      type="text"
-                      placeholder="les niveaux"
-                      className="font-light bg-secondary-color text-[#002027CC] flex-1 border border-gray-300 rounded-lg w-[160px] p-2 focus:outline-none focus:ring-1 focus:ring-main-color ring-1 ring-[#3b8ca0]"
-                    />
+                    <select className=" h-[40px] w-[220px] px-4 py-2 border rounded-lg bg-secondary-color font-light text-[#002027CC] flex-1  border-gray-300  p-2 focus:outline-none focus:ring-1 focus:ring-main-color ring-1 ring-[#3b8ca0]">
+                      <option value="">Niveau...</option>
+                      <option value="primaire">Primaire</option>
+                      <option value="secondaire">Secondaire</option>
+                      <option value="supérieur">Supérieur</option>
+                    </select>
                   </div>
                   <div className="flex items-center">
                     <label className="text-[#002027] text-lg font-normal mr-4">

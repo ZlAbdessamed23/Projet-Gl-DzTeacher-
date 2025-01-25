@@ -65,6 +65,8 @@ type Document = {
   createdAt: string;
 };
 
+const Level = ["Primary", "Cem", "Lycee"];
+
 const subjects = [
   "Mathématiques",
   "Physique",
@@ -122,6 +124,7 @@ const fakeDocuments: Document[] = [
 const TeacherDocuments: React.FC = () => {
   const [documents, setDocuments] = useState<Document[]>(fakeDocuments);
   const [selectedSubject, setSelectedSubject] = useState("Tous");
+  const [selectedLevel, setSelectedLevel] = useState("Tous");
   const [newDocument, setNewDocument] = useState({
     subject: "",
     title: "",
@@ -161,9 +164,9 @@ const TeacherDocuments: React.FC = () => {
                 <div className="flex justify-between pr-8">
                   <Dropdown
                     title="Niveau"
-                    options={subjects}
-                    selected={selectedSubject}
-                    setSelected={setSelectedSubject}
+                    options={Level}
+                    selected={selectedLevel}
+                    setSelected={setSelectedLevel}
                   />
                   <Dropdown
                     title="Matières"
@@ -173,13 +176,13 @@ const TeacherDocuments: React.FC = () => {
                   />
                 </div>
                 <div className="space-y-4">
-                  <div className="flex gap-x-5 py-3">
-                    <label className="text-xl font-medium">
-                      Titre de support :
+                  <div className="flex gap-x-5 py-3 w-[500px]">
+                    <label className="text-xl font-medium ">
+                      Type de support :
                     </label>
                     <input
                       type="text"
-                      className="w-[320px] px-3 py-2 border rounded-md"
+                      className="font-light  bg-secondary-color text-[#002027CC] flex-1 border border-gray-300 rounded-lg  p-2 focus:outline-none focus:ring-1 focus:ring-main-color ring-1 ring-[#3b8ca0]"
                       value={newDocument.title}
                       onChange={(e) =>
                         setNewDocument({
@@ -190,14 +193,14 @@ const TeacherDocuments: React.FC = () => {
                     />
                   </div>
 
-                  <div className="flex gap-x-5 py-3">
+                  <div className="flex gap-x-5 py-3 w-[500px]">
                     <label className="text-xl font-medium">
                       Titre de support :
                     </label>
 
                     <input
                       type="text"
-                      className="w-[320px] px-3 py-2 border rounded-md"
+                      className="font-light bg-secondary-color text-[#002027CC] flex-1 border border-gray-300 rounded-lg  p-2 focus:outline-none focus:ring-1 focus:ring-main-color ring-1 ring-[#3b8ca0]"
                       value={newDocument.title}
                       onChange={(e) =>
                         setNewDocument({

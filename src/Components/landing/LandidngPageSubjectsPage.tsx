@@ -1,11 +1,11 @@
-
+import SubjectCard from "../main/SubjectCard";
 
 const LandidngPageSubjectsPage = () => {
   return (
     <div>
-      {/* here we do fetch and get the subjects infos */}
+      <SubjectCard></SubjectCard>
     </div>
-  )
+  );
 };
 
-export default LandidngPageSubjectsPage
+export default LandidngPageSubjectsPage;

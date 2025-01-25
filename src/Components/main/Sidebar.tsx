@@ -14,12 +14,26 @@ const SidebarItem = ({
   item: SideBarItemType;
   path: string;
 }) => {
+  const isActive = path === item.url;
   return (
-    <Link className="h-14 w-full flex  items-center gap-4" to={item.url}>
-      <p className="text-xl font-semibold text-ternary-dark-color w-40">
+    <Link
+      className={`h-14 w-full flex items-center gap-4 ${
+        isActive ? " text-white" : ""
+      }`}
+      to={item.url}
+    >
+      <p
+        className={`text-xl font-semibold w-40 ${
+          isActive ? "text-white" : "text-ternary-dark-color"
+        }`}
+      >
         {item.name}
       </p>
-      <item.Icon className="size-8 text-ternary-dark-color" />
+      <item.Icon
+        className={`size-8 ${
+          isActive ? "text-white" : "text-ternary-dark-color"
+        }`}
+      />
     </Link>
   );
 };
@@ -51,9 +65,11 @@ const Sidebar = () => {
   const location = useLocation();
   return (
     <div className="w-64 h-screen bg-ternary-extra-light-color flex flex-col">
-      <div className="flex items-center justify-center h-16 bg-ternary-color">
+      <div className="flex items-center h-16 bg-main-color pl-6">
         <img src={logo} alt="dz-teacher-logo-image" className="size-20 pt-4" />
-        <h1 className="text-2xl font-poppins text-[#77E0DF]">Dz Teacher</h1>
+        <h1 className="text-2xl font-poppins text-[#77E0DF] ml-[-20px]">
+          Dz Teacher
+        </h1>
       </div>
 
       <div className="flex flex-col items-center justify-between flex-grow">
